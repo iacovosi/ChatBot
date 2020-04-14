@@ -7,10 +7,14 @@ use App\Conversations;
 
 $botman = resolve('botman');
 
-$botman->hears('form', function ($bot) {
+$botman->hears('.*', function ($bot) {
     $incoming = ($bot->getMessage()->getText());
+
     if (soundex($incoming) == soundex('form'))
         $bot->startConversation(new CyberSafetyConversation());
+    elseif (soundex($incoming) == soundex('help'))
+        $bot->startConversation(new CybersafetyConversation());
+
     else  $bot->reply('Sorry, I did not understand these commands. Please retype again...');
 
 });

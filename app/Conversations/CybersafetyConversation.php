@@ -13,6 +13,7 @@ use App\utilities\Application;
 use App\utilities\PersonalDetails;
 use App\Report;
 use App;
+
 use Mail;
 class CybersafetyConversation extends Conversation
 {
@@ -365,7 +366,7 @@ class CybersafetyConversation extends Conversation
             $this->say("" . trans('lang.thanks'));
 
             $this->storeToDB();
-            $this->sendEmail();
+//            $this->sendEmail();
 
         });
 

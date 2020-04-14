@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome'); //switch to tinker if you wanna run it in tinker
+    //return view('tinker');
 });
 
 Route::match(['get', 'post'], '/botman', 'BotManController@handle');
