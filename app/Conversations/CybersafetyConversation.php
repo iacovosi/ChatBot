@@ -7,6 +7,7 @@ use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Outgoing\Question;
+
 #use App\Mail\TestMail;
 #use Illuminate\Support\Facades\Mail;
 use App\utilities\Application;
@@ -15,6 +16,7 @@ use App\Report;
 use App;
 
 use Mail;
+
 class CybersafetyConversation extends Conversation
 {
 
@@ -113,9 +115,12 @@ class CybersafetyConversation extends Conversation
                 $this->app->setWhere($answer->getValue());
 
 
-                if ($answer->getValue() == 'website' || $answer->getValue() == 'chat_room' || $answer->getValue() == 'social_media' || $answer->getValue() == 'email')
+                if ($answer->getValue() == 'website' || $answer->getValue() == 'chat_room' || $answer->getValue() == 'social_media')
                     $this->askUrl();
-                else {
+
+                elseif ($answer->getValue() == 'email') {
+                    $this->askWhereEmail();
+                } else {
 
                     if ($this->app->getCategory() == 'hotline')
                         $this->askTypeHotline();
@@ -124,11 +129,41 @@ class CybersafetyConversation extends Conversation
                     }
                 }
 
+            } else {
+
+                $this->say("" . trans('lang.mandatory'));
+                $this->askWhere();
             }
 
         });
     }
 
+
+    public function askWhereEmail()
+    {
+        App::setLocale($this->locale);
+
+        $question = Question::create("" . trans('lang.email2'))
+            ->fallback('Unable to ask question')
+            ->callbackId('ask_email');
+
+        $this->ask($question, function (Answer $answer) {
+
+            if (filter_var($answer->getValue(), FILTER_VALIDATE_EMAIL)) {
+                $this->app->setURL($answer->getValue());
+
+                if ($this->app->getCategory() == 'hotline')
+                    $this->askTypeHotline();
+                else
+                    $this->askTypeHelpline();
+            } else {
+                $this->say("" . trans('lang.invalid_email'));
+                $this->askWhereEmail();
+            }
+
+
+        });
+    }
 
     public function askUrl()
     {
@@ -141,13 +176,17 @@ class CybersafetyConversation extends Conversation
 
         $this->ask($question, function (Answer $answer) {
 //            $this->type = $answer->getValue();
-            $this->app->setURL($answer->getValue());
 
 
-            if ($this->app->getCategory() == 'hotline')
-                $this->askTypeHotline();
-            else {
-                $this->askTypeHelpline();
+            if (filter_var($answer->getValue(), FILTER_VALIDATE_URL)) {
+                $this->app->setURL($answer->getValue());
+                if ($this->app->getCategory() == 'hotline')
+                    $this->askTypeHotline();
+                else
+                    $this->askTypeHelpline();
+            } else {
+                $this->say("" . trans('lang.invalid_url'));
+                $this->askUrl();
             }
 
 
@@ -178,6 +217,10 @@ class CybersafetyConversation extends Conversation
                 $this->app->setType($answer->getValue());
 
                 $this->askDescribe();
+            } else {
+
+                $this->say("" . trans('lang.mandatory'));
+                $this->askTypeHotline();
             }
 
         });
@@ -215,6 +258,10 @@ class CybersafetyConversation extends Conversation
                 $this->app->setType($answer->getValue());
 
                 $this->askDescribe();
+            } else {
+
+                $this->say("" . trans('lang.mandatory'));
+                $this->askTypeHelpline();
             }
 
         });
@@ -262,6 +309,10 @@ class CybersafetyConversation extends Conversation
                     $this->pd = new PersonalDetails();
                     $this->askName();
                 }
+            } else {
+
+                $this->say("" . trans('lang.mandatory'));
+                $this->askWhere();
             }
         });
 
@@ -305,8 +356,16 @@ class CybersafetyConversation extends Conversation
             ->callbackId('ask_email');
 
         $this->ask($question, function (Answer $answer) {
-            $this->pd->setEmail($answer->getValue());
-            $this->askPhone();
+
+            if (filter_var($answer->getValue(), FILTER_VALIDATE_EMAIL)) {
+                $this->pd->setEmail($answer->getValue());
+                $this->askPhone();
+            } else {
+                $this->say("" . trans('lang.invalid_email'));
+                $this->askEmail();
+            }
+
+
         });
     }
 
@@ -318,8 +377,16 @@ class CybersafetyConversation extends Conversation
             ->callbackId('ask_phone');
 
         $this->ask($question, function (Answer $answer) {
-            $this->pd->setPhone($answer->getValue());
-            $this->askAge();
+
+            if (filter_var($answer->getValue(), FILTER_VALIDATE_INT)) {
+                $this->pd->setPhone($answer->getValue());
+                $this->askAge();
+            } else {
+                $this->say("" . trans('lang.invalid_phone'));
+                $this->askPhone();
+            }
+
+
         });
     }
 
@@ -338,9 +405,14 @@ class CybersafetyConversation extends Conversation
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
                 $this->pd->setAge($answer->getValue());
+                $this->askGender();
+            } else {
 
+                $this->say("" . trans('lang.mandatory'));
+                $this->askAge();
             }
-            $this->askGender();
+
+
         });
 
     }
@@ -360,18 +432,22 @@ class CybersafetyConversation extends Conversation
             if ($answer->isInteractiveMessageReply()) {
                 $this->pd->setGender($answer->getValue());
 
+                $this->app->setPersonalDetails($this->pd);
+                $this->say("" . trans('lang.thanks'));
+
+                $this->storeToDB();
+                $this->sendEmail();
+
+            } else {
+
+                $this->say("" . trans('lang.mandatory'));
+                $this->askGender();
             }
 
-            $this->app->setPersonalDetails($this->pd);
-            $this->say("" . trans('lang.thanks'));
-
-            $this->storeToDB();
-//            $this->sendEmail();
 
         });
 
     }
-
 
 
     public function sendEmail()
@@ -382,8 +458,7 @@ class CybersafetyConversation extends Conversation
 //        $data = array("name" => "CyberSafe Chatbot Receiver of CyberSafe Team", 'results' => $this->app->returnResultOfChatBot(),'personal_information'=>$this->pd->getPersonalDetails(),"body"=>"With Regards CyberSafe ChatBot");
         if (isset($this->pd) && !empty($this->pd)) {
             $data = array("name" => "CyberSafe Chatbot Reciever of CyberSafe Team", 'results' => $this->app->returnResultOfChatBot(), 'personal_information' => $this->pd->getPersonalDetails(), "body" => "With Regards CyberSafe ChatBot");
-        }
-        else {
+        } else {
             $data = array("name" => "CyberSafe Chatbot Reciever of CyberSafe Team", 'results' => $this->app->returnResultOfChatBot(), 'personal_information' => "Not Given", "body" => "With Regards CyberSafe ChatBot");
 
         }
