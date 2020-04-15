@@ -366,7 +366,7 @@ class CybersafetyConversation extends Conversation
             $this->say("" . trans('lang.thanks'));
 
             $this->storeToDB();
-//            $this->sendEmail();
+            $this->sendEmail();
 
         });
 
