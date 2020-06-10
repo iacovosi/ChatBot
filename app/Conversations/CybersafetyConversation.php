@@ -167,8 +167,6 @@ class CybersafetyConversation extends Conversation
 
     public function askUrl()
     {
-
-
         App::setLocale($this->locale);
         $question = Question::create(__('lang.url'))
             ->fallback('Unable to ask question')
@@ -176,7 +174,6 @@ class CybersafetyConversation extends Conversation
 
         $this->ask($question, function (Answer $answer) {
 //            $this->type = $answer->getValue();
-
 
             if (filter_var($answer->getValue(), FILTER_VALIDATE_URL)) {
                 $this->app->setURL($answer->getValue());

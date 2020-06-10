@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use BotMan\BotMan\BotMan;
 use Illuminate\Http\Request;
 use App\Conversations\CybersafetyConversation;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class BotManController extends Controller
 {
@@ -28,10 +30,21 @@ class BotManController extends Controller
 
     /**
      * Loaded through routes/botman.php
-     * @param  BotMan $bot
+     * @param BotMan $bot
      */
     public function startCybersafetyConversation(BotMan $bot)
     {
         $bot->startConversation(new CyberSafetyConversation());
     }
+
+    public function show()
+    {
+
+        return view('faq');
+
+
+    }
+
 }
+
+

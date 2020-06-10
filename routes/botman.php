@@ -13,7 +13,7 @@ $botman->hears('.*', function ($bot) {
     if (soundex($incoming) == soundex('form'))
         $bot->startConversation(new CyberSafetyConversation());
     elseif (soundex($incoming) == soundex('help'))
-        $bot->startConversation(new CybersafetyConversation());
+        $bot->startConversation(new Conversations\CybersafetyConversationHelp());
 
     else  $bot->reply('Sorry, I did not understand these commands. Please retype again...');
 
