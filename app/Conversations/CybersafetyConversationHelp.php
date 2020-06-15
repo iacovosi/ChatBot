@@ -291,7 +291,6 @@ class CybersafetyConversationHelp extends Conversation
         });
 
 
-
     }
 
     public function askSexualHar()
@@ -426,6 +425,7 @@ class CybersafetyConversationHelp extends Conversation
         });
 
     }
+
     public function askMisinformation()
     {
         $question = Question::create('Ερωτήσεις:')
@@ -459,6 +459,7 @@ class CybersafetyConversationHelp extends Conversation
         });
 
     }
+
     public function askPrivacy()
     {
         $question = Question::create('Ερωτήσεις:')
@@ -479,7 +480,7 @@ class CybersafetyConversationHelp extends Conversation
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
 
-               if ($answer->getValue() == 'q36')
+                if ($answer->getValue() == 'q36')
                     $this->say("<a href='/faq.html#dangers_q_36' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q37')
                     $this->say("<a href='/faq.html#dangers_q_37' target=\"_blank\"> Δες την απάντηση</a>");
@@ -496,6 +497,7 @@ class CybersafetyConversationHelp extends Conversation
         });
 
     }
+
     public function askHarmful()
     {
         $question = Question::create('Ερωτήσεις:')
@@ -518,12 +520,12 @@ class CybersafetyConversationHelp extends Conversation
                     $this->say("<a href='/faq.html#dangers_q_42' target=\"_blank\"> Δες την απάντηση</a>");
 
 
-
             }
 
         });
 
     }
+
     public function askPhishing()
     {
         $question = Question::create('Ερωτήσεις:')
@@ -546,7 +548,6 @@ class CybersafetyConversationHelp extends Conversation
                     $this->say("<a href='/faq.html#dangers_q_44' target=\"_blank\"> Δες την απάντηση</a>");
 
 
-
             }
 
         });
@@ -554,7 +555,275 @@ class CybersafetyConversationHelp extends Conversation
     }
 
 
+    public function askSocialNetworks()
+    {
+        {
 
+
+            $question = Question::create('Ερωτήσεις:')
+                ->fallback('Unable to ask question')
+                ->callbackId('ask_reason')
+                ->addButtons([
+                    Button::create('Facebook')->value('facebook'),
+                    Button::create('Instagram')->value('instagram'),
+                    Button::create('Tik Tok')->value('tiktok'),
+
+                ]);
+
+            $this->ask($question, function (Answer $answer) {
+                if ($answer->isInteractiveMessageReply()) {
+
+                    if ($answer->getValue() == 'facebook')
+                        $this->askFacebook();
+                    elseif ($answer->getValue() == 'instagram')
+                        $this->askInstagram();
+                    elseif ($answer->getValue() == 'tiktok')
+                        $this->askTikTok();
+
+                }
+
+            });
+
+        }
+
+
+    }
+
+
+    public function askFacebook()
+    {
+        {
+            $question = Question::create('Ερωτήσεις:')
+                ->fallback('Unable to ask question')
+                ->callbackId('ask_reason')
+                ->addButtons([
+
+                    Button::create('Πώς μπορώ να δημιουργήσω λογαριασμό στο Facebook;')->value('q1'),
+                    Button::create('Πού μπορώ να βρω τις ρυθμίσεις μου στο Facebook;')->value('q2'),
+                    Button::create('Πώς μπορώ να αλλάξω ή να επαναφέρω τον κωδικό πρόσβασής μου στο Facebook;')->value('q3'),
+                    Button::create('Πώς μπορώ να απενεργοποιήσω προσωρινά το λογαριασμό μου στο Facebook;')->value('q4'),
+                    Button::create('Πώς μπορώ να διαγράψω οριστικά το λογαριασμό μου στο Facebook;')->value('q5'),
+                    Button::create('Δεν μπορώ να συνδεθώ στο Facebook.')->value('q6'),
+                    Button::create('Νομίζω ότι ο λογαριασμός μου στο Facebook έχει παραβιαστεί ή χρησιμοποιείται από κάποιον άλλο χωρίς την άδειά μου.')->value('q7'),
+                    Button::create('Τι μπορώ να κάνω για να διατηρήσω ασφαλή το λογαριασμό μου στο Facebook;')->value('q8'),
+                    Button::create('Πώς μπορώ να ρυθμίσω ποιοι θα βλέπουν το περιεχόμενο του προφίλ και του χρονολογίου μου στο Facebook;')->value('q9'),
+                    Button::create('Πώς μπορώ να λαμβάνω ειδοποιήσεις για μη αναγνωρισμένες συνδέσεις στο Facebook;')->value('q10'),
+                    Button::create('Τι είναι ο έλεγχος ταυτότητας δύο παραγόντων και πώς λειτουργεί στο Facebook;')->value('q11'),
+                    Button::create('Τι μπορώ να κάνω σε περίπτωση που έχω πέσει θύμα ηλεκτρονικού ψαρέματος στο Facebook;')->value('q12'),
+                    Button::create('Έλαβα ένα ύποπτο email ή μήνυμα που φαίνεται ότι προέρχεται από το Facebook.')->value('q13'),
+                    Button::create('Τι είναι το μπλοκάρισμα στο Facebook και πώς μπορώ να μπλοκάρω κάποιον;')->value('q14'),
+                    Button::create('Τι πρέπει να κάνω αν κάποιος με προκαλεί στο Facebook να κάνω κάτι για το οποίο δεν αισθάνομαι άνετα;')->value('q15'),
+                    Button::create('Τι πρέπει να κάνω αν κάποιος απειλεί να κοινοποιήσει κάτι που το παιδί μου θέλει να κρατήσει εμπιστευτικό (π.χ. μηνύματα, φωτογραφίες ή βίντεο) στο Facebook;')->value('q16'),
+                    Button::create('Πώς μπορώ να αναφέρω ακατάλληλο ή προσβλητικό περιεχόμενο στο Facebook (π.χ. γυμνό, εκφράσεις μίσους, απειλές);')->value('q17'),
+                    Button::create('Τι μπορώ να κάνω αν κάποιος με εκφοβίζει, με παρενοχλεί ή μου επιτίθεται στο Facebook;')->value('q18'),
+                    Button::create('Τι πρέπει να κάνω αν δω στο Facebook εικόνες σωματικής κακοποίησης ή σεξουαλικής εκμετάλλευσης ενός παιδιού;')->value('q19'),
+                    Button::create('Πώς μπορώ να αναφέρω ένα λογαριασμό ή μια Σελίδα στο Facebook που παριστάνει ότι είμαι εγώ ή κάποιος άλλος;')->value('q20'),
+                    Button::create('Φόρμα αναφοράς εκβιασμού, προσωπικών εικόνων ή απειλών κοινοποίησης προσωπικών εικόνων (sextortion) στο Facebook')->value('q21'),
+                    Button::create('Φόρμα αναφοράς παραπλανητικού λογαριασμού στο Facebook')->value('q22'),
+                    Button::create('Φόρμα αναφοράς παραβίασης απορρήτου (φωτογραφία, βίντεο κ.λπ.) στο Facebook')->value('q23'),
+                    Button::create('Φόρμα αιτήματος για λογαριασμό εις μνήμην στο Facebook')->value('q24'),
+                    Button::create('Φόρμα αναφοράς χρεώσεων στον διαφημιστικό λογαριασμό σας στο Facebook')->value('q25'),
+                    Button::create('Φόρμα αναφοράς παιδιού κάτω του ορίου ηλικίας στο Facebook')->value('q26'),
+
+
+
+                ]);
+
+            $this->ask($question, function (Answer $answer) {
+                if ($answer->isInteractiveMessageReply()) {
+
+                    if ($answer->getValue() == 'q1')
+                        $this->say("<a href='/faq.html#social_q1' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q2')
+                        $this->say("<a href='/faq.html#social_q2' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q3')
+                        $this->say("<a href='/faq.html#social_q3' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q4')
+                        $this->say("<a href='/faq.html#social_q4' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q5')
+                        $this->say("<a href='/faq.html#social_q5' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q6')
+                        $this->say("<a href='/faq.html#social_q6' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q7')
+                        $this->say("<a href='/faq.html#social_q7' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q8')
+                        $this->say("<a href='/faq.html#social_q8' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q9')
+                        $this->say("<a href='/faq.html#social_q9' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q10')
+                        $this->say("<a href='/faq.html#social_q10' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q11')
+                        $this->say("<a href='/faq.html#social_q11' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q12')
+                        $this->say("<a href='/faq.html#social_q12' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q13')
+                        $this->say("<a href='/faq.html#social_q13' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q14')
+                        $this->say("<a href='/faq.html#social_q14' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q15')
+                        $this->say("<a href='/faq.html#social_q15' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q16')
+                        $this->say("<a href='/faq.html#social_q16' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q17')
+                        $this->say("<a href='/faq.html#social_q17' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q18')
+                        $this->say("<a href='/faq.html#social_q18' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q19')
+                        $this->say("<a href='/faq.html#social_q19' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q20')
+                        $this->say("<a href='/faq.html#social_q20' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q21')
+                        $this->say("<a href='/faq.html#social_q21' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q22')
+                        $this->say("<a href='/faq.html#social_q22' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q23')
+                        $this->say("<a href='/faq.html#social_q23' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q24')
+                        $this->say("<a href='/faq.html#social_q24' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q25')
+                        $this->say("<a href='/faq.html#social_q25' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q26')
+                        $this->say("<a href='/faq.html#social_q26' target=\"_blank\"> Δες την απάντηση</a>");
+
+
+
+                }
+
+            });
+
+        }
+
+
+
+
+    }
+
+    public function askInstagram()
+
+    {
+        {
+            $question = Question::create('Ερωτήσεις:')
+                ->fallback('Unable to ask question')
+                ->callbackId('ask_reason')
+                ->addButtons([
+
+                    Button::create('Δημιουργία λογαριασμού και ονόματος χρήστη στο Instagram')->value('q27'),
+                    Button::create('Πως μπορώ να διαγράψω ή να απενεργοποιήσω οριστικά τον λογαριασμό μου')->value('q28'),
+                    Button::create('Ρυθμίσεις απορρήτου και πληροφορίες στο Instagram')->value('q29'),
+                    Button::create('Πώς μπορώ να μπλοκάρω ή να ξεμπλοκάρω κάποιον στο Instagram')->value('q30'),
+                    Button::create('Πώς μπορώ εγώ ή το παιδί μου να αναφέρουμε ενοχλητική συμπεριφορά ή ακατάλληλο/προσβλητικό περιεχόμενο στο Instagram;')->value('q31'),
+                    Button::create('Φόρμα αναφοράς λογαριασμού πλαστοπροσωπίας στο Instagram')->value('q32'),
+                    Button::create('Φόρμα αναφοράς παρενόχλησης ή bullying στο Instagram')->value('q33'),
+                    Button::create('Φόρμα αναφοράς φωτογραφιών και βίντεο που παραβιάζουν το απόρρητό σας στο Instagram')->value('q34'),
+                    Button::create('Φόρμα αναφοράς χρήστη κάτω του ορίου ηλικίας στο Instagram')->value('q35'),
+                    Button::create('Φόρμα αναφοράς ότι διεύθυνση email μου χρησιμοποιείται ήδη στο Instagram')->value('q36'),
+                    Button::create('Φόρμα αναφοράς λογαριασμού θανόντος για μετατροπή σε "εις μνήμην" στο Instagram')->value('q37'),
+
+
+
+                ]);
+
+            $this->ask($question, function (Answer $answer) {
+                if ($answer->isInteractiveMessageReply()) {
+
+                    if ($answer->getValue() == 'q27')
+                        $this->say("<a href='/faq.html#social_q27' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q28')
+                        $this->say("<a href='/faq.html#social_q28' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q29')
+                        $this->say("<a href='/faq.html#social_q29' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q30')
+                        $this->say("<a href='/faq.html#social_q30' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q31')
+                        $this->say("<a href='/faq.html#social_q31' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q32')
+                        $this->say("<a href='/faq.html#social_q32' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q33')
+                        $this->say("<a href='/faq.html#social_q33' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q34')
+                        $this->say("<a href='/faq.html#social_q34' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q35')
+                        $this->say("<a href='/faq.html#social_q35' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q36')
+                        $this->say("<a href='/faq.html#social_q36' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q37')
+                        $this->say("<a href='/faq.html#social_q37' target=\"_blank\"> Δες την απάντηση</a>");
+
+
+
+
+
+
+                }
+
+            });
+
+        }
+
+
+
+
+    }
+
+    public function askTikTok()
+
+
+    {
+        {
+            $question = Question::create('Ερωτήσεις:')
+                ->fallback('Unable to ask question')
+                ->callbackId('ask_reason')
+                ->addButtons([
+
+                    Button::create('Δημιουργία  λογαριασμού στο Tik Tok')->value('q38'),
+                    Button::create('Διαγραφή λογαριασμού στο Tik Tok')->value('q39'),
+                    Button::create('Αλλαγή κωδικού στο Tik Tok')->value('q40'),
+                    Button::create('Ρυθμίσεις απορρήτου στο Tik Tok')->value('q41'),
+                    Button::create('Όρισε τον λογαριασμό σου ιδιωτικό στο Tik Tok')->value('q42'),
+                    Button::create('Μπλοκάρισμα λογαριασμού στο Tik Tok')->value('q43'),
+                    Button::create('Αναφορά λογαριασμού χρήστη κάτω του ορίου ηλικίας στο Tik Tok')->value('q44'),
+                    Button::create('Αναφορά ακατάλληλου περιεχομένου στο Tik Tok')->value('q45'),
+
+
+
+
+                ]);
+
+            $this->ask($question, function (Answer $answer) {
+                if ($answer->isInteractiveMessageReply()) {
+
+                    if ($answer->getValue() == 'q38')
+                        $this->say("<a href='/faq.html#social_q38' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q39')
+                        $this->say("<a href='/faq.html#social_q39' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q40')
+                        $this->say("<a href='/faq.html#social_q40' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q41')
+                        $this->say("<a href='/faq.html#social_q41' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q42')
+                        $this->say("<a href='/faq.html#social_q42' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q43')
+                        $this->say("<a href='/faq.html#social_q43' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q44')
+                        $this->say("<a href='/faq.html#social_q44' target=\"_blank\"> Δες την απάντηση</a>");
+                    elseif ($answer->getValue() == 'q45')
+                        $this->say("<a href='/faq.html#social_q45' target=\"_blank\"> Δες την απάντηση</a>");
+
+
+
+
+
+
+                }
+
+            });
+
+        }
+
+
+
+
+    }
 
     public function run()
     {
