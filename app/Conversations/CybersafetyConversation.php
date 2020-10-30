@@ -59,11 +59,11 @@ class CybersafetyConversation extends Conversation
 //                $this->where = $answer->getValue();
                 $this->locale = $answer->getValue();
                 App::setLocale($this->locale);
-                $this->say(__('lang.choose'));
+                $this->say("<div style=\"color:blue;\">".__('lang.choose')."</div>");
 
             } else {
 //                App::setLocale("en");
-                $this->say(__('lang.choose'));
+                $this->say("<div style=\"color:blue;\">".__('lang.choose')."</div>");
             }
 
 
@@ -92,7 +92,7 @@ class CybersafetyConversation extends Conversation
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
 
-                $this->say($answer->getValue());
+                $this->say("<div style=\"color:blue;\">".$answer->getValue()."</div>");
                 $this->app->setCategory($answer->getValue());
 //                error_log($this->app->getCategory());
 
@@ -101,7 +101,7 @@ class CybersafetyConversation extends Conversation
 
             else {
 
-                $this->say("" . trans('lang.mandatory_selection'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.mandatory_selection')."</div>" );
                 $this->askCategory();
             }
         });
@@ -126,17 +126,17 @@ class CybersafetyConversation extends Conversation
         $this->ask($question, function (Answer $answer) {
             App::setLocale($this->locale);
             if ($answer->getValue() == 'website')
-                $this->say("" . trans('lang.website'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.website')."</div>" );
             elseif ($answer->getValue() == 'chat_room')
-                $this->say("" . trans('lang.chat_room'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.chat_room')."</div>" );
             elseif ($answer->getValue() == 'mobile_communication')
-                $this->say("" . trans('lang.mobile_communication'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.mobile_communication')."</div>" );
             elseif ($answer->getValue() == 'chat_room')
-                $this->say("" . trans('lang.chat_room'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.chat_room')."</div>" );
             elseif ($answer->getValue() == 'social_media')
-                $this->say("" . trans('lang.social_media'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.social_media')."</div>" );
             elseif ($answer->getValue() == 'email')
-                $this->say("" . trans('lang.email'));
+                $this->say("<div style=\"color:blue;\">".trans('lang.email')."</div>" );
             if ($answer->isInteractiveMessageReply()) {
 //                $this->where = $answer->getValue();
                 $this->app->setWhere($answer->getValue());
@@ -162,7 +162,7 @@ class CybersafetyConversation extends Conversation
 
             } else {
 
-                $this->say("" . trans('lang.mandatory'));
+                $this->say("". trans('lang.mandatory'));
                 $this->askWhere();
             }
 
@@ -242,17 +242,17 @@ class CybersafetyConversation extends Conversation
         $this->ask($question, function (Answer $answer) {
             App::setLocale($this->locale);
             if ($answer->getValue() == 'child_pornography')
-                $this->say("" . trans('lang.child_pornography'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.child_pornography')."</div>");
             elseif ($answer->getValue() == 'hijacking')
-                $this->say("" . trans('lang.hijacking'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.hijacking')."</div>");
             elseif ($answer->getValue() == 'network_hijacking')
-                $this->say("" . trans('lang.network_hijacking'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.network_hijacking')."</div>");
             elseif ($answer->getValue() == 'cyber_fraud')
-                $this->say("" . trans('lang.cyber_fraud'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.cyber_fraud')."</div>");
             elseif ($answer->getValue() == 'hate_speech')
-                $this->say("" . trans('lang.hate_speech'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.hate_speech')."</div>");
             elseif ($answer->getValue() == 'other')
-                $this->say("" . trans('lang.other'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.other')."</div>");
 
             if ($answer->isInteractiveMessageReply()) {
                 $this->type = $answer->getValue();
@@ -298,37 +298,37 @@ class CybersafetyConversation extends Conversation
         $this->ask($question, function (Answer $answer) {
             App::setLocale($this->locale);
             if ($answer->getValue() == 'cyberbullying')
-                $this->say("" . trans('lang.cyberbullying'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.cyberbullying')."</div>");
             elseif ($answer->getValue() == 'excessive_use')
-                $this->say("" . trans('lang.excessive_use'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.excessive_use')."</div>");
             elseif ($answer->getValue() == 'love')
-                $this->say("" . trans('lang.love'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.love')."</div>");
             elseif ($answer->getValue() == 'sexting')
-                $this->say("" . trans('lang.sexting'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.sexting')."</div>");
             elseif ($answer->getValue() == 'sextortion')
-                $this->say("" . trans('lang.sextortion'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.sextortion')."</div>");
             elseif ($answer->getValue() == 'sexual harassment')
-                $this->say("" . trans('lang.sexual harassment'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.sexual harassment')."</div>");
             elseif ($answer->getValue() == 'Grooming')
-                $this->say("" . trans('lang.Grooming'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.grooming')."</div>");
             elseif ($answer->getValue() == 'E-crime')
-                $this->say("" . trans('lang.E-crime'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.ecrime')."</div>");
             elseif ($answer->getValue() == 'hate_speech')
-                $this->say("" . trans('lang.hate_speech'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.hate_speech')."</div>");
             elseif ($answer->getValue() == 'potentially_harmful_content')
-                $this->say("" . trans('lang.potentially_harmful_content'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.potentially_harmful_content')."</div>");
             elseif ($answer->getValue() == 'Gaming')
-                $this->say("" . trans('lang.Gaming'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.gaming')."</div>");
             elseif ($answer->getValue() == 'Online reputation')
-                $this->say("" . trans('lang.Online reputation'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.online_reputation')."</div>");
             elseif ($answer->getValue() == 'technical_settings')
-                $this->say("" . trans('lang.technical_settings'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.technical_settings')."</div>");
             elseif ($answer->getValue() == 'advertising_commercialism')
-                $this->say("" . trans('lang.advertising_commercialism'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.advertising_commercialism')."</div>");
             elseif ($answer->getValue() == 'media_literacy_education')
-                $this->say("" . trans('lang.media_literacy_education'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.media_literacy_education')."</div>");
             elseif ($answer->getValue() == 'media_literacy_education')
-                $this->say("" . trans('lang.media_literacy_education'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.media_literacy_education')."</div>");
             if ($answer->isInteractiveMessageReply()) {
 //                $this->type = $answer->getValue();
                 $this->app->setType($answer->getValue());
@@ -375,9 +375,9 @@ class CybersafetyConversation extends Conversation
         $this->ask($question, function (Answer $answer) {
             App::setLocale($this->locale);
             if ($answer->getValue() == 'anonymous')
-                $this->say("" . trans('lang.anonymous'));
+                $this->say("<div style=\"color:blue;\">".trans('lang.anonymous')."</div>");
             if ($answer->getValue() == 'submit_personal_details')
-                $this->say("" . trans('lang.submit'));
+                $this->say("<div style=\"color:blue;\">". trans('lang.submit')."</div>");
 
             if ($answer->isInteractiveMessageReply()) {
 //                $this->personal_data = $answer->getValue();

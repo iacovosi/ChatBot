@@ -38,7 +38,7 @@ return [
     'cyber_fraud' => 'Cyber Fraud',
     'other' => 'Other',
     'cyberbullying' => 'Cyberbullying',
-    'excessive use' => 'Excessive use',
+    'excessive_use' => 'Excessive use',
     'love' => 'Love / Realationships / Sexuality (online)',
     'sexting' => 'Sexting',
     'sextortion' => 'Sextortion',

@@ -18,6 +18,7 @@
     // Feel free to change the settings on your need
     var botmanWidget = {
         // apiEndpoint: '/botman/tinker',
+        frameEndpoint: 'index.html',
         chatServer:'/botman',
         title: 'Cybersafety ChatBot',
         // iframe:'',
