@@ -64,6 +64,7 @@ return [
     'phone' => 'Please give us your phone',
     'age' => 'Please give us your age',
     'gender' => 'Please give us your gender',
-
+'male' => 'Male',
+'female' => 'Female'
 
 ];

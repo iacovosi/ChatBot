@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\BotManController;
 use App\Conversations\CybersafetyConversation;
 use BotMan\BotMan\BotManFactory;
@@ -6,6 +7,10 @@ use BotMan\BotMan\Drivers\DriverManager;
 use App\Conversations;
 
 $botman = resolve('botman');
+
+$botman->hears('exit', function ($bot) {
+    $bot->reply('Conversation is over bye bye!');
+})->stopsConversation();
 
 $botman->hears('.*', function ($bot) {
     $incoming = ($bot->getMessage()->getText());
@@ -15,6 +20,7 @@ $botman->hears('.*', function ($bot) {
     elseif (soundex($incoming) == soundex('help'))
         $bot->startConversation(new Conversations\CybersafetyConversationHelp());
 
-    else  $bot->reply('Sorry, I did not understand these commands. Please retype again...');
+    elseif($incoming != strtolower('exit'))
+        $bot->reply('Sorry, I did not understand these commands. Please retype again...');
 
 });

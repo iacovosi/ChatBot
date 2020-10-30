@@ -5,6 +5,7 @@ namespace App\Conversations;
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
+use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Outgoing\Question;
 
@@ -24,6 +25,15 @@ class CybersafetyConversation extends Conversation
     public $pd;
     public $locale;
 
+
+
+    public function stopsConversation(IncomingMessage $message)
+    {
+        if ($message->getText() == 'exit') {
+            return true;
+        }
+        return false;
+    }
 
     public function welcome()
     {
@@ -81,11 +91,15 @@ class CybersafetyConversation extends Conversation
             ]);
         $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
+
+                $this->say($answer->getValue());
                 $this->app->setCategory($answer->getValue());
 //                error_log($this->app->getCategory());
 
                 $this->askWhere();
-            } else {
+            }
+
+            else {
 
                 $this->say("" . trans('lang.mandatory_selection'));
                 $this->askCategory();
@@ -110,9 +124,26 @@ class CybersafetyConversation extends Conversation
             ]);
 
         $this->ask($question, function (Answer $answer) {
+            App::setLocale($this->locale);
+            if ($answer->getValue() == 'website')
+                $this->say("" . trans('lang.website'));
+            elseif ($answer->getValue() == 'chat_room')
+                $this->say("" . trans('lang.chat_room'));
+            elseif ($answer->getValue() == 'mobile_communication')
+                $this->say("" . trans('lang.mobile_communication'));
+            elseif ($answer->getValue() == 'chat_room')
+                $this->say("" . trans('lang.chat_room'));
+            elseif ($answer->getValue() == 'social_media')
+                $this->say("" . trans('lang.social_media'));
+            elseif ($answer->getValue() == 'email')
+                $this->say("" . trans('lang.email'));
             if ($answer->isInteractiveMessageReply()) {
 //                $this->where = $answer->getValue();
                 $this->app->setWhere($answer->getValue());
+
+
+
+
 
 
                 if ($answer->getValue() == 'website' || $answer->getValue() == 'chat_room' || $answer->getValue() == 'social_media')
@@ -209,6 +240,20 @@ class CybersafetyConversation extends Conversation
             ]);
 
         $this->ask($question, function (Answer $answer) {
+            App::setLocale($this->locale);
+            if ($answer->getValue() == 'child_pornography')
+                $this->say("" . trans('lang.child_pornography'));
+            elseif ($answer->getValue() == 'hijacking')
+                $this->say("" . trans('lang.hijacking'));
+            elseif ($answer->getValue() == 'network_hijacking')
+                $this->say("" . trans('lang.network_hijacking'));
+            elseif ($answer->getValue() == 'cyber_fraud')
+                $this->say("" . trans('lang.cyber_fraud'));
+            elseif ($answer->getValue() == 'hate_speech')
+                $this->say("" . trans('lang.hate_speech'));
+            elseif ($answer->getValue() == 'other')
+                $this->say("" . trans('lang.other'));
+
             if ($answer->isInteractiveMessageReply()) {
                 $this->type = $answer->getValue();
                 $this->app->setType($answer->getValue());
@@ -221,6 +266,7 @@ class CybersafetyConversation extends Conversation
             }
 
         });
+
     }
 
     public function askTypeHelpline()
@@ -250,6 +296,39 @@ class CybersafetyConversation extends Conversation
             ]);
 
         $this->ask($question, function (Answer $answer) {
+            App::setLocale($this->locale);
+            if ($answer->getValue() == 'cyberbullying')
+                $this->say("" . trans('lang.cyberbullying'));
+            elseif ($answer->getValue() == 'excessive_use')
+                $this->say("" . trans('lang.excessive_use'));
+            elseif ($answer->getValue() == 'love')
+                $this->say("" . trans('lang.love'));
+            elseif ($answer->getValue() == 'sexting')
+                $this->say("" . trans('lang.sexting'));
+            elseif ($answer->getValue() == 'sextortion')
+                $this->say("" . trans('lang.sextortion'));
+            elseif ($answer->getValue() == 'sexual harassment')
+                $this->say("" . trans('lang.sexual harassment'));
+            elseif ($answer->getValue() == 'Grooming')
+                $this->say("" . trans('lang.Grooming'));
+            elseif ($answer->getValue() == 'E-crime')
+                $this->say("" . trans('lang.E-crime'));
+            elseif ($answer->getValue() == 'hate_speech')
+                $this->say("" . trans('lang.hate_speech'));
+            elseif ($answer->getValue() == 'potentially_harmful_content')
+                $this->say("" . trans('lang.potentially_harmful_content'));
+            elseif ($answer->getValue() == 'Gaming')
+                $this->say("" . trans('lang.Gaming'));
+            elseif ($answer->getValue() == 'Online reputation')
+                $this->say("" . trans('lang.Online reputation'));
+            elseif ($answer->getValue() == 'technical_settings')
+                $this->say("" . trans('lang.technical_settings'));
+            elseif ($answer->getValue() == 'advertising_commercialism')
+                $this->say("" . trans('lang.advertising_commercialism'));
+            elseif ($answer->getValue() == 'media_literacy_education')
+                $this->say("" . trans('lang.media_literacy_education'));
+            elseif ($answer->getValue() == 'media_literacy_education')
+                $this->say("" . trans('lang.media_literacy_education'));
             if ($answer->isInteractiveMessageReply()) {
 //                $this->type = $answer->getValue();
                 $this->app->setType($answer->getValue());
@@ -294,6 +373,12 @@ class CybersafetyConversation extends Conversation
 
 
         $this->ask($question, function (Answer $answer) {
+            App::setLocale($this->locale);
+            if ($answer->getValue() == 'anonymous')
+                $this->say("" . trans('lang.anonymous'));
+            if ($answer->getValue() == 'submit_personal_details')
+                $this->say("" . trans('lang.submit'));
+
             if ($answer->isInteractiveMessageReply()) {
 //                $this->personal_data = $answer->getValue();
                 $this->app->setPersonalData($answer->getValue());
@@ -394,12 +479,17 @@ class CybersafetyConversation extends Conversation
             ->fallback('Unable to ask question')
             ->callbackId('ask_age')
             ->addButtons([
-                Button::create('5-11 years')->value('five_to_eleven'),
-                Button::create('12-18 years')->value('twelve_to_eighteen'),
-                Button::create('18+ years')->value('eighteen_plus'),
+                Button::create('5-11')->value('five_to_eleven'),
+                Button::create('12-18')->value('twelve_to_eighteen'),
+                Button::create('18+')->value('eighteen_plus'),
 
             ]);
         $this->ask($question, function (Answer $answer) {
+
+            App::setLocale($this->locale);
+            if ($answer->getValue() == 'anonymous')
+                $this->say("" . trans('lang.anonymous'));
+
             if ($answer->isInteractiveMessageReply()) {
                 $this->pd->setAge($answer->getValue());
                 $this->askGender();
@@ -421,11 +511,13 @@ class CybersafetyConversation extends Conversation
             ->fallback('Unable to ask question')
             ->callbackId('ask_gender')
             ->addButtons([
-                Button::create('Male')->value('male'),
-                Button::create('Female')->value('female'),
+                Button::create("" . trans('lang.male'))->value('male'),
+                Button::create("" . trans('lang.female'))->value('female'),
 
             ]);
         $this->ask($question, function (Answer $answer) {
+
+
             if ($answer->isInteractiveMessageReply()) {
                 $this->pd->setGender($answer->getValue());
 
@@ -446,10 +538,8 @@ class CybersafetyConversation extends Conversation
 
     }
 
-
     public function sendEmail()
     {
-
         $to_name = 'CyberSafe Team';
         $to_email = 'andreas.charalampous.cy@gmail.com';
 //        $data = array("name" => "CyberSafe Chatbot Receiver of CyberSafe Team", 'results' => $this->app->returnResultOfChatBot(),'personal_information'=>$this->pd->getPersonalDetails(),"body"=>"With Regards CyberSafe ChatBot");

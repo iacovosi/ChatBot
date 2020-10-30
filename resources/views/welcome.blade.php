@@ -21,7 +21,7 @@
         chatServer:'/botman',
         title: 'Cybersafety ChatBot',
         // iframe:'',
-        introMessage: 'Hello. Type HELP for information or FORM to complete a form',
+        introMessage: 'Hello. Type HELP for information or FORM to complete a form or EXIT to exit',
         placeholderText: 'Ask Me Something',
         mainColor: '#F28240',
         bubbleBackground: '#FFF',

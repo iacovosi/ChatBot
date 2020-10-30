@@ -6,6 +6,7 @@ namespace App\Conversations;
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
+use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
 use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\Drivers\Facebook\Extensions\ButtonTemplate;
@@ -15,7 +16,6 @@ use phpDocumentor\Reflection\Element;
 
 class CybersafetyConversationHelp extends Conversation
 {
-
 
     public function welcome()
     {
@@ -50,12 +50,17 @@ class CybersafetyConversationHelp extends Conversation
 
             }
 
+            else{
+
+                $this->welcome();
+            }
         });
 
 
 //    $this->say("<a href='/faq.html#q90' target=\"_blank\"> Go To answer</a>");
 
     }
+
 
 
     public function askGeneralInfo()
@@ -78,17 +83,17 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'hotline')
-                    $this->say("<a href='/faq.html#general_q_1' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=general_qa_1' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'helpline')
-                    $this->say("<a href='/faq.html#general_q_2' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=general_qa_2' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'communicationhot')
-                    $this->say("<a href='/faq.html#general_q_3' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=general_qa_3' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'communicationhelp')
-                    $this->say("<a href='/faq.html#general_q_4' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=general_qa_4' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'timeline_hotline')
-                    $this->say("<a href='/faq.html#general_q_5' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=general_qa_5' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'timeline_helpline')
-                    $this->say("<a href='/faq.html#general_q_6' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=general_qa_6' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -157,7 +162,6 @@ class CybersafetyConversationHelp extends Conversation
     public function askSecurity()
     {
 
-
         $question = Question::create('Ερωτήσεις:')
             ->fallback('Unable to ask question')
             ->callbackId('ask_reason')
@@ -173,13 +177,13 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q1')
-                    $this->say("<a href='/faq.html#dangers_q_1' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_1' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q2')
-                    $this->say("<a href='/faq.html#dangers_q_2' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_2' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q3')
-                    $this->say("<a href='/faq.html#dangers_q_3' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_3' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q4')
-                    $this->say("<a href='/faq.html#dangers_q_4' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_4' target=\"_blank\"> Δες την απάντηση</a>");
             }
 
         });
@@ -210,15 +214,15 @@ class CybersafetyConversationHelp extends Conversation
 
 
                 if ($answer->getValue() == 'q5')
-                    $this->say("<a href='/faq.html#dangers_q_5' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_5' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q6')
-                    $this->say("<a href='/faq.html#dangers_q_6' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_6' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q7')
-                    $this->say("<a href='/faq.html#dangers_q_7' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_7' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q8')
-                    $this->say("<a href='/faq.html#dangers_q_8' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_8' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q9')
-                    $this->say("<a href='/faq.html#dangers_q_9' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_9' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -247,11 +251,11 @@ class CybersafetyConversationHelp extends Conversation
 
 
                 if ($answer->getValue() == 'q10')
-                    $this->say("<a href='/faq.html#dangers_q_10' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_10' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q11')
-                    $this->say("<a href='/faq.html#dangers_q_11' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_11' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q12')
-                    $this->say("<a href='/faq.html#dangers_q_12' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_12' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -279,11 +283,11 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q13')
-                    $this->say("<a href='/faq.html#dangers_q_13' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_13' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q14')
-                    $this->say("<a href='/faq.html#dangers_q_14' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_14' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q15')
-                    $this->say("<a href='/faq.html#dangers_q_15' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_15' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -312,11 +316,11 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q16')
-                    $this->say("<a href='/faq.html#dangers_q_16' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_16' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q17')
-                    $this->say("<a href='/faq.html#dangers_q_17' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_17' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q18')
-                    $this->say("<a href='/faq.html#dangers_q_18' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_18' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -344,11 +348,11 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q19')
-                    $this->say("<a href='/faq.html#dangers_q_19' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_19' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q20')
-                    $this->say("<a href='/faq.html#dangers_q_20' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_20' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q21')
-                    $this->say("<a href='/faq.html#dangers_q_21' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_21' target=\"_blank\"> Δες την απάντηση</a>");
 
             }
 
@@ -376,17 +380,17 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q22')
-                    $this->say("<a href='/faq.html#dangers_q_22' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_22'target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q23')
-                    $this->say("<a href='/faq.html#dangers_q_23' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_23'target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q24')
-                    $this->say("<a href='/faq.html#dangers_q_24' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_24' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q25')
-                    $this->say("<a href='/faq.html#dangers_q_25' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_25'target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q26')
-                    $this->say("<a href='/faq.html#dangers_q_26' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_26' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q27')
-                    $this->say("<a href='/faq.html#dangers_q_27' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_27' target=\"_blank\"> Δες την απάντηση</a>");
 
             }
 
@@ -413,11 +417,11 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q28')
-                    $this->say("<a href='/faq.html#dangers_q_22' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_28' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q29')
-                    $this->say("<a href='/faq.html#dangers_q_23' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_29' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q30')
-                    $this->say("<a href='/faq.html#dangers_q_24' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_30' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -445,13 +449,13 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q31')
-                    $this->say("<a href='/faq.html#dangers_q_31' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_31' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q32')
-                    $this->say("<a href='/faq.html#dangers_q_32' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_32' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q33')
-                    $this->say("<a href='/faq.html#dangers_q_33' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_33' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q34')
-                    $this->say("<a href='/faq.html#dangers_q_34' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_34' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -481,15 +485,15 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q36')
-                    $this->say("<a href='/faq.html#dangers_q_36' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_36' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q37')
-                    $this->say("<a href='/faq.html#dangers_q_37' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_37' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q38')
-                    $this->say("<a href='/faq.html#dangers_q_38' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_38' target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q39')
-                    $this->say("<a href='/faq.html#dangers_q_39' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_39'target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q40')
-                    $this->say("<a href='/faq.html#dangers_q_40' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_40' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -515,9 +519,9 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q41')
-                    $this->say("<a href='/faq.html#dangers_q_41' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_41'target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q42')
-                    $this->say("<a href='/faq.html#dangers_q_42' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_42' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -543,9 +547,9 @@ class CybersafetyConversationHelp extends Conversation
             if ($answer->isInteractiveMessageReply()) {
 
                 if ($answer->getValue() == 'q43')
-                    $this->say("<a href='/faq.html#dangers_q_43' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_43'target=\"_blank\"> Δες την απάντηση</a>");
                 elseif ($answer->getValue() == 'q44')
-                    $this->say("<a href='/faq.html#dangers_q_44' target=\"_blank\"> Δες την απάντηση</a>");
+                    $this->say("<a href='/faq.html?dc=dangers_qa_44' target=\"_blank\"> Δες την απάντηση</a>");
 
 
             }
@@ -633,57 +637,57 @@ class CybersafetyConversationHelp extends Conversation
                 if ($answer->isInteractiveMessageReply()) {
 
                     if ($answer->getValue() == 'q1')
-                        $this->say("<a href='/faq.html#social_q1' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_1' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q2')
-                        $this->say("<a href='/faq.html#social_q2' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_2' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q3')
-                        $this->say("<a href='/faq.html#social_q3' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_3' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q4')
-                        $this->say("<a href='/faq.html#social_q4' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_4' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q5')
-                        $this->say("<a href='/faq.html#social_q5' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_5' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q6')
-                        $this->say("<a href='/faq.html#social_q6' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_6' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q7')
-                        $this->say("<a href='/faq.html#social_q7' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_7' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q8')
-                        $this->say("<a href='/faq.html#social_q8' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_8' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q9')
-                        $this->say("<a href='/faq.html#social_q9' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_9' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q10')
-                        $this->say("<a href='/faq.html#social_q10' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_10' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q11')
-                        $this->say("<a href='/faq.html#social_q11' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_11' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q12')
-                        $this->say("<a href='/faq.html#social_q12' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_12' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q13')
-                        $this->say("<a href='/faq.html#social_q13' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_13' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q14')
-                        $this->say("<a href='/faq.html#social_q14' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_14' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q15')
-                        $this->say("<a href='/faq.html#social_q15' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_15' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q16')
-                        $this->say("<a href='/faq.html#social_q16' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_16' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q17')
-                        $this->say("<a href='/faq.html#social_q17' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_17' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q18')
-                        $this->say("<a href='/faq.html#social_q18' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_18' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q19')
-                        $this->say("<a href='/faq.html#social_q19' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_19' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q20')
-                        $this->say("<a href='/faq.html#social_q20' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_20' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q21')
-                        $this->say("<a href='/faq.html#social_q21' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_21' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q22')
                         $this->say("<a href='/faq.html#social_q22' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q23')
-                        $this->say("<a href='/faq.html#social_q23' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_23' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q24')
-                        $this->say("<a href='/faq.html#social_q24' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_24' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q25')
-                        $this->say("<a href='/faq.html#social_q25' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_25' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q26')
-                        $this->say("<a href='/faq.html#social_q26' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_26' target=\"_blank\"> Δες την απάντηση</a>");
 
 
 
@@ -727,27 +731,27 @@ class CybersafetyConversationHelp extends Conversation
                 if ($answer->isInteractiveMessageReply()) {
 
                     if ($answer->getValue() == 'q27')
-                        $this->say("<a href='/faq.html#social_q27' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_27' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q28')
-                        $this->say("<a href='/faq.html#social_q28' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_28' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q29')
-                        $this->say("<a href='/faq.html#social_q29' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_29'target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q30')
-                        $this->say("<a href='/faq.html#social_q30' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_30' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q31')
-                        $this->say("<a href='/faq.html#social_q31' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_31' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q32')
-                        $this->say("<a href='/faq.html#social_q32' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_32' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q33')
-                        $this->say("<a href='/faq.html#social_q33' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_33' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q34')
-                        $this->say("<a href='/faq.html#social_q34' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_34' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q35')
-                        $this->say("<a href='/faq.html#social_q35' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_35' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q36')
-                        $this->say("<a href='/faq.html#social_q36' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_36' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q37')
-                        $this->say("<a href='/faq.html#social_q37' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_37' target=\"_blank\"> Δες την απάντηση</a>");
 
 
 
@@ -793,21 +797,21 @@ class CybersafetyConversationHelp extends Conversation
                 if ($answer->isInteractiveMessageReply()) {
 
                     if ($answer->getValue() == 'q38')
-                        $this->say("<a href='/faq.html#social_q38' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_38' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q39')
-                        $this->say("<a href='/faq.html#social_q39' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_39' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q40')
-                        $this->say("<a href='/faq.html#social_q40' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_40'target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q41')
-                        $this->say("<a href='/faq.html#social_q41' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_41' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q42')
-                        $this->say("<a href='/faq.html#social_q42' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_42' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q43')
-                        $this->say("<a href='/faq.html#social_q43' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_43' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q44')
-                        $this->say("<a href='/faq.html#social_q44' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_44' target=\"_blank\"> Δες την απάντηση</a>");
                     elseif ($answer->getValue() == 'q45')
-                        $this->say("<a href='/faq.html#social_q45' target=\"_blank\"> Δες την απάντηση</a>");
+                        $this->say("<a href='/faq.html?dc=social_qa_45' target=\"_blank\"> Δες την απάντηση</a>");
 
 
 
